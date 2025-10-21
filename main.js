@@ -75,10 +75,18 @@ const perguntas = [
 
 let atual = 0;
 let perguntaAtual;
+let historiaFinal = " ";
 
 function mostraPerguntas(){
+
+  if (atual >= perguntas.length){
+    mostraResultado();
+    return;
+  }
+
 perguntaAtual = perguntas[atual];
 caixaPerguntas.textContent = perguntaAtual.enunciado;
+caixaAlternativas.textContent = " ";
 mostraAlternativas();
 }
 function mostraAlternativas(){
@@ -96,6 +104,12 @@ function respostaSelecionada(opcaoSelecionada){
     historiaFinal += afirmacoes + " ";
     atual++
     mostraPergunta();
+}
+
+function mostraResultado(){
+    caixaPerguntas.textContent = "Se fosse possível ..."
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = " ";
 }
 
 mostraPerguntas();
