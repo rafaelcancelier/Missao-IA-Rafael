@@ -1,8 +1,12 @@
-const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixapPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
+
+
+
+
 
 
 const perguntas = [
@@ -11,11 +15,11 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Fazer seu hobby em casa.",
-                afirmacao: "Você se sente mais confortável e relaxado ao praticar seu hobby no ambiente de casa",
+                afirmacao: "Você se sente mais confortável e relaxado ao praticar seu hobby no ambiente de casa.",
             },
             {
-                texto: "Fazer seu hobby fora de casa",
-                afirmacao: "Você gosta de explorar novos lugares e aproveitar o ar livre ao realizar seu hobby",
+                texto: "Fazer seu hobby fora de casa.",
+                afirmacao: "Você gosta de explorar novos lugares e aproveitar o ar livre ao realizar seu hobby.",
             }
         ]
     },
@@ -28,7 +32,7 @@ const perguntas = [
             },
             {
                 texto: "Algumas vezes por semana ou menos.",
-                afirmacao: "Você integra seu hobby na rotina diária para manter o equilíbrio e o prazer constante.",
+                afirmacao: "Você prefere reservar momentos especiais para seu hobby, tornando-o uma recompensa ocasional.",
             }
         ]
     },
@@ -36,12 +40,12 @@ const perguntas = [
         enunciado: "Você prefere hobbies criativos ou físicos?",
         alternativas: [
             {
-                texto: "Hobbies criativos, como pintar ou escrever",
+                texto: "Hobbies criativos, como pintar ou escrever.",
                 afirmacao: "Você gosta de expressar ideias e emoções através de criações artísticas e imaginativas.",
             },
             {
-                texto: "Hobbies físicos, como correr ou dançar",
-                afirmacao: "Você gosta de expressar ideias e emoções através de criações artísticas e imaginativas.",
+                texto: "Hobbies físicos, como correr ou dançar.",
+                afirmacao: "Você valoriza o movimento e a energia que os hobbies ativos trazem para o corpo e a mente.",
             }
         ]
     },
@@ -49,12 +53,12 @@ const perguntas = [
         enunciado: "Você compartilha seu hobby com outras pessoas?",
         alternativas: [
             {
-                texto: "Sim, gosto de fazer com amigos ou família.",
-                afirmacao: "Você encontra mais diversão ao conectar-se com outros e trocar experiências no hobby",
+                texto: "sim, gosto de fazer com amigos ou família",
+                afirmacao: "Você encontra mais diversão ao conectar-se com outros e trocar experiências no hobby.",
             },
             {
                 texto: "Não, prefiro praticar sozinho.",
-                afirmacao: "Você encontra mais diversão ao conectar-se com outros e trocar experiências no hobby",
+                afirmacao: "Você aprecia a introspecção e o foco pessoal que um hobby solitário proporciona.",
             }
         ]
     },
@@ -66,8 +70,21 @@ const perguntas = [
                 afirmacao: "Você usa o hobby para energizar o dia e manter a produtividade alta.",
             },
             {
-                texto: "À noite ou antes de dormir.",
-                afirmacao: "Você usa o hobby para energizar o dia e manter a produtividade alta.",
+                texto: "À noite ou antes de dormir",
+                afirmacao: "Você relaxa com o hobby no final do dia, ajudando a desconectar e descansar melhor.",
+            }
+        ]
+    },
+ {
+        enunciado: "Você já pensou em transformar seu hobby em profissão?",
+        alternativas: [
+            {
+                texto: "Sim, adoraria trabalhar com isso.",
+                afirmacao: "Você sonha em unir paixão e carreira para uma vida mais realizada profissionalmente.",
+            },
+            {
+                texto: "Não, prefiro mantê-lo como lazer.",
+                afirmacao: "Você preserva o hobby como um escape puro, sem pressões de trabalho ou obrigações.",
             }
         ]
     },
@@ -79,16 +96,17 @@ let historiaFinal = " ";
 
 function mostraPerguntas(){
 
-  if (atual >= perguntas.length){
-    mostraResultado();
-    return;
-  }
+    if(atual >= perguntas.length){
+        mostraResultado();
+        return;
+    }
 
-perguntaAtual = perguntas[atual];
-caixaPerguntas.textContent = perguntaAtual.enunciado;
-caixaAlternativas.textContent = " ";
-mostraAlternativas();
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = " ";
+    mostraAlternativas();
 }
+
 function mostraAlternativas(){
     for (const alternativa of perguntaAtual.alternativas){
         const botaoAlternativas = document.createElement("button");
@@ -96,14 +114,14 @@ function mostraAlternativas(){
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
         caixaAlternativas.appendChild(botaoAlternativas);
     }
-
 }
+
 
 function respostaSelecionada(opcaoSelecionada){
     const afirmacoes = opcaoSelecionada.afirmacao;
     historiaFinal += afirmacoes + " ";
     atual++;
-    mostraPergunta();
+    mostraPerguntas();
 }
 
 function mostraResultado(){
